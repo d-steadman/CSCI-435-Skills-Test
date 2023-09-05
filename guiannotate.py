@@ -8,6 +8,7 @@ from annotate import annotate_boxes
 
 # Get directory and verify existence
 
+assert len(sys.argv == 2), "Program expects one argument"
 directory = sys.argv[1]
 assert os.path.isdir(directory), f"{directory} is not a valid directory"
 

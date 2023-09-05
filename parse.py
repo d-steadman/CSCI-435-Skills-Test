@@ -1,11 +1,9 @@
-import xml.etree.ElementTree as ET
-
-tree = ET.parse("Programming-Assignment-Data/com.yelp.android.xml")
-root = tree.getroot()
-
 def get_leafs(root):
     """Recursive generator to get leaf nodes from the root of an ET element."""
-    if len(root) == 0:
+
+    # Only return leaf nodes that apply to the target package
+    if len(root) == 0 and \
+       root.attrib.get("resource-id").startswith(root.attrib.get("package")):
         yield root
 
     else:
@@ -13,7 +11,7 @@ def get_leafs(root):
             yield from get_leafs(child)
 
 
-def get_gui_bounds(root):
+def get_gui_boxes(root):
     """Extract bounding boxes from GUI leaf nodes."""
 
     bounds = [node.attrib["bounds"] for node in get_leafs(root)]
@@ -23,10 +21,8 @@ def get_gui_bounds(root):
     boxes = []
 
     for bounds_text in bounds:
-        coords = bounds_text[1:-1].split("][")  # Split into pair of coords
-        box = [[int(n) for n in coord.split(",")] for coord in coords]
+        coords = bounds_text[1:-1].replace("][", ",")  # Combine coord numbers into one list
+        box = [int(n) for n in coords.split(",")]
         boxes.append(box)
 
     return boxes
-
-print(get_gui_bounds(root))

@@ -12,7 +12,7 @@ The only library you need to install to user this is PIL, Python's Imaging libra
 
 Use the command below to annotate all screens in a given directory. Each screen must have a screenshot and XML document of the same name. If one is missing, a warning will be produced.
 
-```python guiannotate.py <direction>```
+```python guiannotate.py <directory>```
 
 The annotated screenshots will be the original name with '_ANNOTATED' added to the end. Screens containing the _ANNOTATED suffix will be ignored as inputs in future usages of GUIAnnotate.
 

@@ -23,8 +23,10 @@ def get_gui_bounds(root):
     boxes = []
 
     for bounds_text in bounds:
-        coords = bounds_text[1:-1].replace("][", ",")   # Replaces parentheses with a comma for easy splitting
-        box = [int(n) for n in coords.split(",")]
+        coords = bounds_text[1:-1].split("][")  # Split into pair of coords
+        box = [[int(n) for n in coord.split(",")] for coord in coords]
         boxes.append(box)
 
     return boxes
+
+print(get_gui_bounds(root))

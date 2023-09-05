@@ -8,14 +8,14 @@ from annotate import annotate_boxes
 
 # Get directory and verify existence
 
-assert len(sys.argv == 2), "Program expects one argument"
+assert len(sys.argv) == 2, "Program expects one argument"
 directory = sys.argv[1]
 assert os.path.isdir(directory), f"{directory} is not a valid directory"
 
 # Get screen names in directory
 
 # Removal of file extension from Stack Overflow: https://stackoverflow.com/questions/678236/how-do-i-get-the-filename-without-the-extension-from-a-path-in-python
-screens = [filename.rsplit(".", maxsplit=1)[0] for filename in os.listdir(directory)]
+screens = set([filename.rsplit(".", maxsplit=1)[0] for filename in os.listdir(directory)])
 
 # Filter annotated screens
 screens = filter(lambda screen: "_ANNOTATED" not in screen, screens)

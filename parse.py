@@ -1,7 +1,7 @@
+# NOTE: leafs with these resource-id's will be annotated
 IGNORE_RESOURCE_IDS = (
     "android:id/navigationBarBackground",
     "android:id/statusBarBackground",
-
 )
 
 def get_leafs(root):
@@ -27,7 +27,8 @@ def get_gui_boxes(root):
     boxes = []
 
     for bounds_text in bounds:
-        coords = bounds_text[1:-1].replace("][", ",")  # Combine coord numbers into one list
+        # Combine coord numbers into one list
+        coords = bounds_text[1:-1].replace("][", ",")
         box = [int(n) for n in coords.split(",")]
         boxes.append(box)
 

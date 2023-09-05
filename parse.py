@@ -1,9 +1,15 @@
+IGNORE_RESOURCE_IDS = (
+    "android:id/navigationBarBackground",
+    "android:id/statusBarBackground",
+
+)
+
 def get_leafs(root):
     """Recursive generator to get leaf nodes from the root of an ET element."""
 
     # Only return leaf nodes that apply to the target package
     if len(root) == 0 and \
-       root.attrib.get("resource-id").startswith(root.attrib.get("package")):
+       root.attrib.get("resource-id") not in IGNORE_RESOURCE_IDS:
         yield root
 
     else:
